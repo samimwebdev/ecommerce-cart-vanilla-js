@@ -22,7 +22,7 @@
       <div class="container-fluid d-flex flex-row justify-content-between">
         <a class="navbar-brand " href="#">BDCommerce</a>
         <div class='float-right'>
-          <span class='cart'>0</span> <i data-toggle="modal" data-target="#cartModal"
+          <span class='cart-count'>0</span> <i data-toggle="modal" data-target="#cartModal"
             class='fas fa-cart-plus fa-2x cart-btn'></i>
         </div>
       </div>
@@ -40,8 +40,8 @@
   </div>
 
   <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="CartModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content ">
         <div class="modal-header">
           <h5 class="modal-title">Product in the Cart</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -49,7 +49,7 @@
           </button>
         </div>
         <div class="modal-body cart-body">
-          <p>All cart product Goes here</p>
+          <p>No Product to show</p>
         </div>
       </div>
     </div>

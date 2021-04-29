@@ -1,11 +1,15 @@
+const _saveProductsData = Symbol()
+const _saveCartCount = Symbol()
+const _getCartCount = Symbol()
+const _cartCount = Symbol()
+const _cartProducts = Symbol()
 class Store {
-  add(product) {
-    console.log(product)
-  }
+
+
+
+
 
 }
-
-
 
 const store = new Store()
 export { store }

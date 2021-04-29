@@ -7,6 +7,9 @@ class Product {
 
     return this.data
   }
+  findProduct(id) {
+    return this.data.find(product => product.id === id)
+  }
 }
 
 
