@@ -23,28 +23,39 @@ class UI {
     this.updateCartProducts()
 
   }
-  print(products) {
+  print(categories) {
     const { productsElm } = this.loadSelectors()
+    let elm = '';
 
-    products.forEach(product => {
-      const { id, name, price, description, image_url } = product
-
-      const elm = `<div class="col-md-4 col-6">
-        <div class="card">
-          <img src="${image_url}"
-            class="card-img-top product-image" alt="">
-          <div class="card-body">
-            <h5 class="card-title product-name">${name}</h5>
-            <p class='product-description'>${description}</p>
-            </p>
-            <p class="card-title product-price">${price}</p>
-            <p class='product-id'>${id}</p>
-            <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
+    categories.forEach(category => {
+      elm = `
+      <h2> ${category.name.toUpperCase()}</h2>
+      <hr />
+      <div class='row mb-5'>
+      `
+      category.products.length > 0 && category.products.forEach(product => {
+        const { id, name, price, description, image_url } = product
+        elm += `
+        <div class="col-md-4 col-6">
+          <div class="card">
+            <img src="${image_url}"
+              class="card-img-top product-image" alt="">
+            <div class="card-body">
+              <h5 class="card-title product-name">${name}</h5>
+              <p class='product-description'>${description}</p>
+              </p>
+              <p class="card-title product-price">${price}</p>
+              <p class='product-id'>${id}</p>
+              <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
+            </div>
           </div>
         </div>
-      </div>`
-      productsElm.insertAdjacentHTML('afterBegin', elm)
+      `})
+      elm += '</div>'
+      productsElm.insertAdjacentHTML('beforeend', elm)
     })
+    // productsElm.innerHTML = elm;
+
 
 
   }
@@ -135,20 +146,13 @@ class UI {
     //Removed from modal view
     e.target.closest('tr').remove()
   }
-  fetchCartDataFromStore() {
-    //when browser reloads or  user refreshes browser cart related data must be loaded from localStorage
-    console.log('Getting LocalStorage data')
-    // store.getDataFromStorage()
-    //update view 
-    // this.updateCart()
-    //update cart data
-  }
+
   async init() {
     const { productsElm, cartBtnElm, cartBody } = this.loadSelectors()
     //Get Dynamic data from API source
-    const products = await product.getProducts()
+    const categories = await product.getProductsWithCategories()
     //show Products in UI
-    this.print(products)
+    this.print(categories)
     //Add to cart Event Listener
     productsElm.addEventListener('click', e => {
       if (e.target.classList.contains('add-to-cart')) {

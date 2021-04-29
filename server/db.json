@@ -10,11 +10,27 @@
     },
     {
       "id": "2",
+      "name": "Mouse",
+      "price": "$20",
+      "description": "Mouse Description",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/61KvrKMyRJL.__AC_SX300_SY300_QL70_FMwebp_.jpg",
+      "categoryId": 1
+    },
+    {
+      "id": "3",
       "name": "Laptop",
       "price": "$120",
       "description": "laptop Description",
       "image_url": "https://images-na.ssl-images-amazon.com/images/I/71vvXGmdKWL.__AC_SY300_SX300_QL70_FMwebp_.jpg",
-      "categoryId": 1
+      "categoryId": 2
+    },
+    {
+      "id": "4",
+      "name": "Laptop",
+      "price": "$120",
+      "description": "laptop Description",
+      "image_url": "https://images-na.ssl-images-amazon.com/images/I/71vvXGmdKWL.__AC_SY300_SX300_QL70_FMwebp_.jpg",
+      "categoryId": 2
     }
   ],
   "categories": [
@@ -24,9 +40,9 @@
       "name": "mouse"
     },
     {
+      "name": "laptop",
       "productId": 2,
-      "id": 2,
-      "name": "laptop"
+      "id": 2
     }
   ]
 }

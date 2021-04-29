@@ -1,10 +1,9 @@
 class Product {
   data = []
-
-  async getProducts() {
-    const response = await fetch('http://localhost:3000/products')
-    const products = await response.json()
-    this.data = [...this.data, ...products]
+  async getProductsWithCategories() {
+    const response = await fetch(`http://localhost:3000/categories?_embed=products`)
+    const categories = await response.json()
+    this.data = [...this.data, ...categories]
     return this.data
   }
 
