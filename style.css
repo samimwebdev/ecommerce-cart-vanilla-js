@@ -1,13 +1,19 @@
 .product-id{
   display: none
 }
+.cart{
+     position: fixed;
+    left: 95%;
+    top: 5%;
+    font-size: 28px;
+}
 
 span.cart-count {
-    font-size: 16px;
+    font-size: 19px;
     width: 20px;
     position: relative;
-    top: -17px;
-    left: 4px;
+    top: 22px;
+    left: -24px;
     border: 2px solid grey;
     border-radius: 96%;
     color: #333;
