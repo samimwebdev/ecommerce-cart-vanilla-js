@@ -21,10 +21,10 @@ class Cart {
       })
     }
 
-    //update store
-    //store.updateCart(this.data)
-    //update to the store
-    //store.updateCartCount(this.cartCount)
+    //update to the store cart count
+    store.updateCartCount(this.cartCount)
+    //update to the store cart
+    store.updateCart(this.data)
   }
   decrement(product) {
     this.cartCount--
@@ -33,11 +33,11 @@ class Cart {
     if (foundCartProductIndex >= 0) {
       this.data[foundCartProductIndex].count--
     }
-    //update store
-    //store.updateCart(this.data)
+
     //update to the store
-    //store.updateCartCount(this.cartCount)
-    //
+    store.updateCartCount(this.cartCount)
+    //update to the store cart
+    store.updateCart(this.data)
   }
   get cartCount() {
     return this.cartCount
@@ -56,8 +56,10 @@ class Cart {
     this.cartCount -= this.data[findIndex].count
     const filteredProduct = this.data.filter(cartProduct => cartProduct.id !== product.id)
     this.data = filteredProduct
+    store.updateCartCount(this.cartCount)
 
-    console.log(this.data)
+    //update to the store cart
+    store.updateCart(this.data)
   }
 
 }

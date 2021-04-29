@@ -15,6 +15,14 @@ class UI {
       cartBody
     }
   }
+  populateCartFromLocalStorage() {
+    const cartProducts = cart.getDataFromStorage()
+    //update cart count
+    this.updateCartCount()
+    //update view
+    this.updateCartProducts()
+
+  }
   print(products) {
     const { productsElm } = this.loadSelectors()
 
@@ -43,6 +51,7 @@ class UI {
   getId(e) {
     return e.target.previousElementSibling.textContent
   }
+
   addToCart(e) {
     //Identify product
     const id = this.getId(e)
@@ -51,11 +60,11 @@ class UI {
     //Adding to the cart
     cart.add(foundProduct)
     //update cart
-    this.updateCart()
+    this.updateCartCount()
     //update view  
-    this.showCart()
+    this.updateCartProducts()
   }
-  showCart() {
+  updateCartProducts() {
     const { cartBody } = this.loadSelectors()
     console.log(cart.data)
     const elm = `
@@ -90,7 +99,7 @@ class UI {
 
   }
 
-  updateCart() {
+  updateCartCount() {
     const { cartCountElm } = this.loadSelectors()
     cartCountElm.textContent = cart.cartCount
     //update cart count in localStorage
@@ -98,12 +107,12 @@ class UI {
   incrementCartCount(id) {
     const foundProduct = product.findProduct(id)
     cart.incrementCount(foundProduct)
-    this.updateCart()
+    this.updateCartCount()
   }
   decrementCartCount(id) {
     const foundProduct = product.findProduct(id)
     cart.decrementCount(foundProduct)
-    this.updateCart()
+    this.updateCartCount()
   }
   getCartProductId(e) {
     return e.target.parentElement.parentElement.children[1].children[0].textContent
@@ -138,9 +147,8 @@ class UI {
     const { productsElm, cartBtnElm, cartBody } = this.loadSelectors()
     //Get Dynamic data from API source
     const products = await product.getProducts()
+    //show Products in UI
     this.print(products)
-    //LocalStorage related data access
-    //document.addEventListener('DOMContentLoaded', this.fetchCartDataFromStore);
     //Add to cart Event Listener
     productsElm.addEventListener('click', e => {
       if (e.target.classList.contains('add-to-cart')) {
@@ -151,7 +159,7 @@ class UI {
 
     //cart Button Click
     cartBtnElm.addEventListener("click", (e) => {
-      this.showCart()
+      this.updateCartProducts()
     })
     //increment and decrement cart count
     cartBody.addEventListener("click", e => {
@@ -177,7 +185,7 @@ class UI {
         const id = this.getCartProductId(e)
         this.removeProduct(id, e)
         //update to the UI
-        this.updateCart()
+        this.updateCartCount()
       }
     })
 
