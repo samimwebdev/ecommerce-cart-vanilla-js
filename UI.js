@@ -1,6 +1,5 @@
 import { product } from './Product';
 import { cart } from './Cart';
-import { store } from './Store'
 
 class UI {
   loadSelectors() {
@@ -8,11 +7,13 @@ class UI {
     const cartCountElm = document.querySelector('.cart-count')
     const cartBtnElm = document.querySelector('.cart-btn')
     const cartBody = document.querySelector('.cart-body');
+    const cartModal = document.querySelector('#cartModal');
     return {
       productsElm,
       cartCountElm,
       cartBtnElm,
-      cartBody
+      cartBody,
+      cartModal
     }
   }
   populateCartFromLocalStorage() {
@@ -54,10 +55,6 @@ class UI {
       elm += '</div>'
       productsElm.insertAdjacentHTML('beforeend', elm)
     })
-    // productsElm.innerHTML = elm;
-
-
-
   }
   getId(e) {
     return e.target.previousElementSibling.textContent
@@ -137,6 +134,13 @@ class UI {
     }
     return parseInt(e.target.nextElementSibling.value)
 
+  }
+  hideModal() {
+    const { cartModal } = this.loadSelectors()
+    //Why Regular Javascript not working here
+    if (cartModal.classList.contains('show')) {
+      cartModal.click();
+    }
   }
   removeProduct(id, e) {
     //get product by id

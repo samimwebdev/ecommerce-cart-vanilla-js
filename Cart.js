@@ -1,4 +1,5 @@
 import { store } from './Store'
+import { ui } from './UI'
 class Cart {
   data = []
   cartCount = 0
@@ -56,8 +57,11 @@ class Cart {
     this.cartCount -= this.data[findIndex].count
     const filteredProduct = this.data.filter(cartProduct => cartProduct.id !== product.id)
     this.data = filteredProduct
-    store.updateCartCount(this.cartCount)
+    if (this.cartCount === 0) {
+      ui.hideModal()
+    }
 
+    store.updateCartCount(this.cartCount)
     //update to the store cart
     store.updateCart(this.data)
   }
