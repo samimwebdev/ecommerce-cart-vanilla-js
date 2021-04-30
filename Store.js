@@ -1,45 +1,38 @@
-const _saveProductsData = Symbol()
-const _saveCartCount = Symbol()
-const _getCartCount = Symbol()
-const _cartCount = Symbol()
-const _cartProducts = Symbol()
 class Store {
-  constructor() {
-    this[_cartCount] = 0
-    this[_cartProducts] = []
-  }
+  #cartCount = 0
+  #cartProducts = []
   updateCartCount(cartCount) {
-    this[_cartCount] = cartCount
-    this[_saveCartCount]()
+    this.#cartCount = cartCount
+    this.#saveCartCount()
   }
 
-  [_saveCartCount]() {
-    localStorage.setItem('BDCommerce-cart-count', this[_cartCount])
+  #saveCartCount() {
+    localStorage.setItem('BDCommerce-cart-count', this.#cartCount)
   }
 
-  [_saveProductsData]() {
-    localStorage.setItem('BDCommerce-cart', JSON.stringify(this[_cartProducts]))
+  #saveProductsData() {
+    localStorage.setItem('BDCommerce-cart', JSON.stringify(this.#cartProducts))
   }
   updateCart(products) {
-    this[_cartProducts] = products
-    this[_saveProductsData]()
+    this.#cartProducts = products
+    this.#saveProductsData()
   }
 
   getProductsData() {
     if (localStorage.getItem('BDCommerce-cart') === null) {
-      return this[_cartProducts]
+      return this.#cartProducts
     } else {
-      this[_cartProducts] = JSON.parse(localStorage.getItem('BDCommerce-cart'))
-      return this[_cartProducts]
+      this.#cartProducts = JSON.parse(localStorage.getItem('BDCommerce-cart'))
+      return this.#cartProducts
     }
   }
 
   getCartCount() {
     if (localStorage.getItem('BDCommerce-cart-count') === null) {
-      return this[_cartCount]
+      return this.#cartCount
     } else {
-      this[_cartCount] = localStorage.getItem('BDCommerce-cart-count')
-      return this[_cartCount]
+      this.#cartCount = localStorage.getItem('BDCommerce-cart-count')
+      return this.#cartCount
     }
   }
 
